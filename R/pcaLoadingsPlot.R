@@ -6,7 +6,7 @@
 # 0.0.1
 # 
 
-pcaLoadingsPlot <- function(x, n_components) {
+pcaLoadingsPlot <- function(x, n_components, plot.it = TRUE) {
   require(ggplot2)
   require(tibble)
   
@@ -30,6 +30,6 @@ pcaLoadingsPlot <- function(x, n_components) {
     theme_linedraw() +
     xlab("Raw Item")
   
-  # Render
-  print(plt)
+  # Render or return
+  if (plot.it) {print(plt)} else return(plt)
 }
