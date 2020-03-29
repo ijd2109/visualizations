@@ -26,7 +26,8 @@ parallelCoordPlot <- function(data, unique.id.col, group.col, selection = everyt
     theme_linedraw() +
     theme(plot.background = element_rect(fill="beige"),
           panel.background = element_rect(fill="black"),
-          panel.grid = element_line(color = "white")) +
+          panel.grid = element_line(color = "white"),
+          axis.text.x = element_text(angle = 80)) +
     theme(...)
   
   if (plot.it) {print(plt)} else return(plt)
