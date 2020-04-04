@@ -21,7 +21,7 @@ pcaLoadingsPlot <- function(x, n_components, plot.it = TRUE) {
     gather(key = "PC", value = "Loading", -raw_item)
   
   # Generate plot
-  plt <- ggplot(data = plt_dat) +
+  plt = ggplot(data = plt_dat) +
     geom_segment(aes(x = raw_item, xend = raw_item, y = Loading, yend = 0), color = "grey") +
     geom_hline(yintercept = 0, linetype = 2, color = "grey") +
     geom_point(aes(x = raw_item, y = Loading)) +
@@ -30,6 +30,6 @@ pcaLoadingsPlot <- function(x, n_components, plot.it = TRUE) {
     theme_linedraw() +
     xlab("Raw Item")
   
-  # Render or return
+  # # Render
   if (plot.it) {print(plt)} else return(plt)
 }
