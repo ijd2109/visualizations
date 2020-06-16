@@ -12,6 +12,7 @@ parallelCoordPlot <- function(data,
                               selection = everything(), 
                               plot.it = TRUE, 
                               plot_group_means = FALSE, 
+                              scale = FALSE,
                               ...)
 {
   require(ggplot2)
@@ -19,7 +20,10 @@ parallelCoordPlot <- function(data,
   require(dplyr)
   require(tidyr)
   dat <- dplyr::select(data, !!enquo(unique.id.col), !!enquo(group.col), all_of(selection)) %>%
-    mutate_at(-1:-2, ~((. - mean(.)) / sd(.)))
+    mutate_at(-1:-2, ~as.numeric(as.character(.)))
+  if (scale) {
+    dat[-1:-2] <- dat[-1:-2] %>% mutate_all(~((. - mean(.)) / sd(.)))
+  }
   # Gather the columns whose values will be plotted into long format
   reshaped <- tidyr::gather(data = dat, key = key, value = value, 
                             -!!enquo(unique.id.col), -!!enquo(group.col)) %>%
